@@ -1,0 +1,98 @@
+STEP 1: Load and split
+Total messages: 30
+Training messages: 20
+Testing messages: 10
+
+STEP 2: Prior probabilities (from the training set)
+P(spam) = 9/20 = 0.45
+P(ham)  = 11/20 = 0.55
+
+STEP 3: Conditional probabilities with Laplace smoothing
+Vocabulary size |V| = 158
+Total words in spam messages = 166
+Total words in ham messages  = 83
+Formula: P(word|spam) = (count + 1) / (166 + 158)
+Formula: P(word|ham)  = (count + 1) / (83 + 158)
+A few example words:
+    call:  P(word|spam) = 0.0216   P(word|ham) = 0.0083
+    free:  P(word|spam) = 0.0154   P(word|ham) = 0.0041
+   prize:  P(word|spam) = 0.0093   P(word|ham) = 0.0041
+     you:  P(word|spam) = 0.0185   P(word|ham) = 0.0332
+       i:  P(word|spam) = 0.0031   P(word|ham) = 0.0249
+      am:  P(word|spam) = 0.0031   P(word|ham) = 0.0166
+
+STEPS 4 and 5: Classify each sentence in the test set
+======================================================================
+Test sentence 1: Tell where you reached
+  P(sentence|spam) = 5.445e-10
+  P(sentence|ham)  = 4.743e-09
+  P(spam|sentence) = 0.0859   (unnormalized: 2.450e-10)
+  P(ham|sentence)  = 0.9141   (unnormalized: 2.609e-09)
+  Predicted class: ham   |   Actual class: ham
+----------------------------------------------------------------------
+Test sentence 2: Your gonna have to pick up a burger for yourself on your way home
+  P(sentence|spam) = 2.055e-31
+  P(sentence|ham)  = 3.444e-31
+  P(spam|sentence) = 0.3281   (unnormalized: 9.249e-32)
+  P(ham|sentence)  = 0.6719   (unnormalized: 1.894e-31)
+  Predicted class: ham   |   Actual class: ham
+----------------------------------------------------------------------
+Test sentence 3: As a valued customer I am pleased to advise you that for your recent review you are awarded a Bonus Prize
+  P(sentence|spam) = 3.159e-46
+  P(sentence|ham)  = 2.101e-45
+  P(spam|sentence) = 0.1095   (unnormalized: 1.421e-46)
+  P(ham|sentence)  = 0.8905   (unnormalized: 1.155e-45)
+  Predicted class: ham   |   Actual class: spam
+----------------------------------------------------------------------
+Test sentence 4: Urgent you are awarded a complimentary trip to EuroDisinc To claim text immediately
+  P(sentence|spam) = 4.018e-28
+  P(sentence|ham)  = 2.075e-29
+  P(spam|sentence) = 0.9406   (unnormalized: 1.808e-28)
+  P(ham|sentence)  = 0.0594   (unnormalized: 1.141e-29)
+  Predicted class: spam   |   Actual class: spam
+----------------------------------------------------------------------
+Test sentence 5: Finished class where are you
+  P(sentence|spam) = 3.361e-12
+  P(sentence|ham)  = 1.968e-11
+  P(spam|sentence) = 0.1226   (unnormalized: 1.512e-12)
+  P(ham|sentence)  = 0.8774   (unnormalized: 1.082e-11)
+  Predicted class: ham   |   Actual class: ham
+----------------------------------------------------------------------
+Test sentence 6: where are you how did you perform
+  P(sentence|spam) = 1.921e-16
+  P(sentence|ham)  = 4.337e-14
+  P(spam|sentence) = 0.0036   (unnormalized: 8.644e-17)
+  P(ham|sentence)  = 0.9964   (unnormalized: 2.385e-14)
+  Predicted class: ham   |   Actual class: ham
+----------------------------------------------------------------------
+Test sentence 7: you can call me now
+  P(sentence|spam) = 3.529e-11
+  P(sentence|ham)  = 7.872e-11
+  P(spam|sentence) = 0.2684   (unnormalized: 1.588e-11)
+  P(ham|sentence)  = 0.7316   (unnormalized: 4.330e-11)
+  Predicted class: ham   |   Actual class: ham
+----------------------------------------------------------------------
+Test sentence 8: I am waiting Call me once you are free
+  P(sentence|spam) = 1.067e-20
+  P(sentence|ham)  = 5.601e-19
+  P(spam|sentence) = 0.0154   (unnormalized: 4.803e-21)
+  P(ham|sentence)  = 0.9846   (unnormalized: 3.080e-19)
+  Predicted class: ham   |   Actual class: ham
+----------------------------------------------------------------------
+Test sentence 9: I am on the way to homei
+  P(sentence|spam) = 2.054e-16
+  P(sentence|ham)  = 4.066e-15
+  P(spam|sentence) = 0.0397   (unnormalized: 9.245e-17)
+  P(ham|sentence)  = 0.9603   (unnormalized: 2.236e-15)
+  Predicted class: ham   |   Actual class: ham
+----------------------------------------------------------------------
+Test sentence 10: Please call our customer service representative between 10am-9pm as you have WON a guaranteed cash prize
+  P(sentence|spam) = 1.845e-35
+  P(sentence|ham)  = 7.413e-37
+  P(spam|sentence) = 0.9532   (unnormalized: 8.305e-36)
+  P(ham|sentence)  = 0.0468   (unnormalized: 4.077e-37)
+  Predicted class: spam   |   Actual class: spam
+----------------------------------------------------------------------
+
+STEP 6: Test set accuracy
+Accuracy = 9/10 = 0.90 (90%)
